@@ -53,23 +53,22 @@ I chose this design because sending a wrong notification could make restaurant o
 C4Container
     title CampusEats Review System
  
+    Person(owner, "Restaurant Owner", "Receives negative-review notifications")
     Person(customer, "Customer", "Writes restaurant reviews")
  
     System_Boundary(campuseats, "CampusEats") {
-        Container(cache, "Cache", "Cache Store", "Stores previous predictions")
+        Container(notification, "Notification Service", "Push API", "Sends notifications to owners")
         Container(review, "Review Service", "Python, FastAPI, small model (scikit-learn)", "Receives reviews and runs the small model locally")
         Container(large, "Large Model Service", "ML Model API", "Checks negative and uncertain reviews")
+        Container(cache, "Cache", "Cache Store", "Stores previous predictions")
         Container(db, "Review Database", "Database", "Stores reviews and pending results")
-        Container(notification, "Notification Service", "Push API", "Sends notifications to owners")
     }
  
-    Person(owner, "Restaurant Owner", "Receives negative-review notifications")
- 
     Rel(customer, review, "Submits a review", "HTTP/JSON")
-    Rel(review, cache, "Checks previous predictions")
-    Rel(review, large, "Sends negative and uncertain reviews for confirmation")
-    Rel(review, db, "Stores reviews and pending results")
     Rel(review, notification, "Sends notification for confirmed negative reviews")
+    Rel(review, large, "Sends negative and uncertain reviews for confirmation")
+    Rel(review, cache, "Checks previous predictions")
+    Rel(review, db, "Stores reviews and pending results")
     Rel(notification, owner, "Delivers notification")
  
     UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
