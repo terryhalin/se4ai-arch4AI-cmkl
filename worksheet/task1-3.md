@@ -1,6 +1,6 @@
 # Week 6 worksheet: serving patterns
 
-**Name:**
+**Name:** Htet Aung Lin
 
 **Student ID:**
 
@@ -12,8 +12,8 @@ Copy result rows from `results/runs.csv` (or the load test's output) into the ta
 
 | Run | p50 ms | p95 ms | accuracy | large calls |
 |---|---|---|---|---|
-| t0-large | | | | |
-| t0-small | | | | |
+| t0-large | 499 | 592 | 93.5% | 100% |
+| t0-small | 27 | 57 | 72.5% | 0% |
 
 **Q0.** What does the large model buy, and what does it cost?
 
@@ -23,8 +23,8 @@ Copy result rows from `results/runs.csv` (or the load test's output) into the ta
 
 | Run | run time (s) | p50 ms | p95 ms | errors | pending | accuracy |
 |---|---|---|---|---|---|---|
-| t1-before | | | | | | |
-| t1-after | | | | | | |
+| t1-before | 28.9 | 239 | 434 | 20 | 0 | 92.8% |
+| t1-after | 9.5 | 391 | 1007 | 0 | 26 | 93.7% |
 
 **Q1.1** In `t1-before`, p50 can look *better* than the baseline. Why is p50 misleading here? Which column tells the real story?
 
@@ -46,10 +46,10 @@ Copy result rows from `results/runs.csv` (or the load test's output) into the ta
 
 | Run | threshold | p50 ms | p95 ms | accuracy | large calls |
 |---|---|---|---|---|---|
-| t2-0.6 | 0.6 | | | | |
-| t2-0.7 | 0.7 | | | | |
-| t2-0.8 | 0.8 | | | | |
-| t2-0.9 | 0.9 | | | | |
+| t2-0.6 | 0.6 | 7 | 528 | 91.5% | 38% |
+| t2-0.7 | 0.7 | 376 | 565 | 93.0% | 53% |
+| t2-0.8 | 0.8 | 478 | 691 | 93.5% | 64% |
+| t2-0.9 | 0.9 | 474 | 644 | 93.5% | 77% |
 
 **Q2.1** Which threshold would you deploy for CampusEats, and why? Name the quality you give up.
 
@@ -67,7 +67,7 @@ Copy result rows from `results/runs.csv` (or the load test's output) into the ta
 
 | Run | p50 ms | p95 ms | accuracy | large calls | cache hits |
 |---|---|---|---|---|---|
-| t3-cache | | | | | |
+| t3-cache | 7 | 559 | 93.0% | 38% | 35% |
 
 **Q3.1** Which reviews benefit from the cache, and which never will?
 
