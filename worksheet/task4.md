@@ -65,8 +65,8 @@ C4Container
     }
  
     Rel(customer, review, "Submits a review", "HTTP/JSON")
-    Rel(review, notification, "Sends notification for confirmed negative reviews")
-    Rel(review, large, "Sends negative and uncertain reviews for confirmation")
+    Rel(review, notification, "Confirmed negatives")
+    Rel(review, large, "Negative and uncertain reviews")
     Rel(review, cache, "Checks previous predictions")
     Rel(review, db, "Stores reviews and pending results")
     Rel(notification, owner, "Delivers notification")
@@ -137,7 +137,7 @@ Only reviews confirmed as negative by the large model will trigger notifications
   - The cache needs to be updated when a new model is deployed.
   - Pending reviews may not receive notifications immediately.
   - After a model update, the cache may be empty and the large-model call rate may increase. In the original experiment without cache, it was 53%, which would mean 40 × 53% = 21.2 calls per second. This is higher than the model's capacity of 20 calls per second.
-  
+
 **Alternatives considered:**
  
 **T1 – Model as a Service**
