@@ -54,15 +54,16 @@ C4Container
     title CampusEats Review System
  
     Person(customer, "Customer", "Writes restaurant reviews")
-    Person(owner, "Restaurant Owner", "Receives negative-review notifications")
  
     System_Boundary(campuseats, "CampusEats") {
-        Container(review, "Review Service", "Python, FastAPI, small model (scikit-learn)", "Receives reviews and runs the small model locally")
         Container(cache, "Cache", "Cache Store", "Stores previous predictions")
+        Container(review, "Review Service", "Python, FastAPI, small model (scikit-learn)", "Receives reviews and runs the small model locally")
         Container(large, "Large Model Service", "ML Model API", "Checks negative and uncertain reviews")
         Container(db, "Review Database", "Database", "Stores reviews and pending results")
         Container(notification, "Notification Service", "Push API", "Sends notifications to owners")
     }
+ 
+    Person(owner, "Restaurant Owner", "Receives negative-review notifications")
  
     Rel(customer, review, "Submits a review", "HTTP/JSON")
     Rel(review, cache, "Checks previous predictions")
@@ -70,6 +71,8 @@ C4Container
     Rel(review, db, "Stores reviews and pending results")
     Rel(review, notification, "Sends notification for confirmed negative reviews")
     Rel(notification, owner, "Delivers notification")
+ 
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
  
 ## 3. Evidence
